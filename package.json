@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "install": "^0.13.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "momentjs": "^2.0.0",
+    "npm": "^8.19.3",
+    "parcel": "^2.8.0",
+    "parcel-transformer-svelte3-plus": "^0.2.8",
+    "svelte": "^3.52.0",
+    "svelte-fullcalendar": "^2.0.0-beta.0",
+    "svelte-loading-spinners": "^0.3.4",
+    "svelte-preprocess": "^4.10.7"
+  },
+  "scripts": {
+    "clean": "rm dist/*",
+    "dev": "parcel watch assets/js/main.js",
+    "build": "parcel build assets/js/main.js"
+  },
+  "dependencies": {
+    "@fullcalendar/core": "^5.11.3",
+    "@fullcalendar/daygrid": "^5.11.3",
+    "@fullcalendar/list": "^5.11.3",
+    "@fullcalendar/timegrid": "^5.11.3",
+    "@wordpress/api-fetch": "^6.18.0"
+  }
+}

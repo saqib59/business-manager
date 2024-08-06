@@ -1,0 +1,590 @@
+
+/**
+ * jquery.todoList
+ */
+#bm-tasks .business-manager-todo {
+  position: relative;
+  min-width: 15em;
+}
+.business-manager-todo *,
+.business-manager-todo *:before,
+.business-manager-todo *:after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.business-manager-todo .business-manager-todo-title {
+  padding: .5em 2em .5em .5em;
+  position: relative;
+  max-height: 5em;
+  overflow: hidden;
+}
+.business-manager-todo .business-manager-todo-title-text {
+  display: inline-block;
+  width: 100%;
+}
+.business-manager-todo .business-manager-todo-menu-show {
+  display: block;
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  font-weight: 900;
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: .9em;
+  height: 6em;
+  padding: .2em;
+}
+.business-manager-todo .business-manager-todo-menu {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 10em;
+  padding: .2em;
+  z-index: 1;
+}
+.business-manager-todo .business-manager-todo-menu-actions {
+  position: absolute;
+  right: .2em;
+  top: .2em;
+}
+.business-manager-todo .business-manager-todo-menu-actions .business-manager-todo-action {
+  padding: .2em;
+  display: inline-block;
+}
+.business-manager-todo .business-manager-todo-menu-items {
+  max-height: 10em;
+  overflow-y: auto;
+  margin: 2em 0em 1em;
+}
+.business-manager-todo .business-manager-todo-menu-items a {
+  display: block;
+  padding: .2em;
+  margin-bottom: 0.5em;
+}
+.business-manager-todo .business-manager-todo-footer {
+  position: relative;
+}
+.business-manager-todo .business-manager-todo-action {
+  cursor: pointer;
+  text-decoration: none;
+}
+.business-manager-todo .business-manager-todo-button {
+  display: inline-block;
+}
+.business-manager-todo .business-manager-todo-button-confirm {
+  display: inline-block;
+  margin-top: 5px;
+  font-weight: 600;
+  background: #d54e21;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #fff;
+  margin-left: 4px;
+  cursor: pointer;
+  border: none
+}
+.business-manager-todo .business-manager-todo-button-cancel {
+  display: inline-block;
+  padding: .2em;
+  height: 6em;
+}
+.business-manager-todo-item-action-remove-cancel .dashicons {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.business-manager-todo .business-manager-todo-add {
+  padding: 0 27px 0 0;
+  position: relative;
+  border: none;
+}
+.business-manager-todo .business-manager-todo-add-input,
+.business-manager-todo .business-manager-todo-add-action {
+  line-height: 1.5em;
+  display: inline-block;
+}
+.business-manager-todo .business-manager-todo-add-input {
+  width: 100%;
+  border: none;
+}
+.business-manager-todo .business-manager-todo-add-input-text {
+  width: 100%;
+  border: none;
+}
+.business-manager-todo .business-manager-todo-add-action {
+  display: inline-block;
+  text-decoration: none;
+  overflow: hidden;
+  font-weight: 900;
+  padding: 0em;
+  position: absolute;
+  top: 6px;
+  right: 0;
+}
+.business-manager-todo .business-manager-todo-edit {
+  position: relative;
+}
+.business-manager-todo .business-manager-todo-edit-input {
+  width: 100%;
+  padding-right: 28px;
+}
+.business-manager-todo .business-manager-todo-edit-input input {
+  width: 100%;
+}
+.business-manager-todo .business-manager-todo-edit-save {
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: absolute;
+  right: 7px;
+  top: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+.business-manager-todo .business-manager-todo-item {
+  margin: 5px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.business-manager-todo .business-manager-todo-item-title {
+  border-bottom: medium none;
+  border-top: medium none;
+  border-right: medium none;
+  padding: 0.5em;
+  margin-left: 30px;
+  padding-right: 23px;
+  overflow: hidden;
+}
+.business-manager-todo .business-manager-todo-item-title-text {
+  display: inline-block;
+  width: 100%;
+}
+.business-manager-todo .business-manager-todo-item-actions-left {
+  display: inline-block;
+  position: absolute;
+  top: 7px;
+  left: 6px;
+}
+.business-manager-todo .business-manager-todo-item-actions-right {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 6em;
+}
+.business-manager-todo .business-manager-todo-item-action-remove {
+  background-repeat: no-repeat;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  top: 6px;
+  cursor: pointer;
+  color: #aaa;
+}
+.business-manager-todo .business-manager-todo-item-action-remove-confirm {
+  background-repeat: no-repeat;
+  text-indent: -1000px;
+  text-align: center;
+  overflow: hidden;
+  display: inline-block;
+  padding: .2em;
+  width: 19px;
+  height: 24px;
+  /* image from: https://www.iconfinder.com/icons/284073/bin_delete_editor_recycle_trash_icon#size=24 */
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAYCAYAAAAYl8YPAAACTUlEQVQ4T62VS0iVURSFVRpYGCnlxKIGUdBLbRA9zGgmaYI0SKVhEWVENCjTgVGgUhhElBrmSAslGvlqJhg9iAbaAyVKpHQghqFYEkH2LTkH9v05XW/ggcVZe+91193/Oec/f3JS/JFCeZWR/IT/+ddPkuN4qTYCthrNG/ieeGYTFLOW6DCR8rj+fQqsS0S9hGZKZmkgdRnM5mWmRf4IVjhDLfB2MAxU/wV2gE+uPsu8G3w2DXxXzm/AV4INprgGrrVU1zJLB/OuLm0+GDP6d/Bsb/aKYK8pboS/BOsDZu/JnQBDRv8UfsSbPSE4Zoq74J1Ajxvt7Dm5KjBg9K3wU97sDsF5UzwIvwkOBMx6yDWDLqO/Dr/qzS4T3DDFo/Bzaj1g9ohcH2gz+tPwFm+mNWg3RcXFoCxg1kTuA7hr9EXwXm92mKDfFCvg2eBMwKye3ByoNfpc+JA320Kgs+ZHNUTHozJgdoXcWnDJ6DPh37yZboYfpqj1mwF1AbOz5HRotU4a2u2VYMHeGtMkMpxAu/UWNAbMysmVgFKnHWXeLG7NdIp3OkEHs7b+YcCskNwFUOC0z5gPRc10ir1AW38PdAfM8sjdAvvMH6vbmM4eEJ90ghfMWnz9a/QNUPePwTanbWBe3Az7mNeIa5xA50hnTI8eNdOF8Br4C/Ui/HbUTLtz35npxtgPvgTMVpObBP7bcNx1GtOZFlbvnYY+HFo/PeZvoCtHN8sC0DdA3wI/9P7qhokxyyEeNKJE6Sb3BDFmOtVaq/8Z6lR3n7pP+guXqYbxgVDCfwAAAABJRU5ErkJggg==");
+}
+.business-manager-todo .business-manager-todo-item-checkbox {
+  background-repeat: no-repeat;
+  display: inline-block;
+  text-indent: -1000px;
+  text-align: center;
+  overflow: hidden;
+  height: 20px;
+  width: 20px;
+  opacity: .7;
+  cursor: pointer;
+  border: 2px solid #ccc;
+}
+.business-manager-todo .business-manager-todo-item-done .business-manager-todo-item-checkbox, .business-manager-todo .business-manager-todo-item-done .business-manager-todo-item-checkbox::before {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 24px;
+  line-height: 1;
+  font-family: dashicons;
+  text-decoration: inherit;
+  font-weight: normal;
+  font-style: normal;
+  vertical-align: top;
+  text-align: center;
+  -webkit-transition: color .1s ease-in 0;
+  transition: color .1s ease-in 0;
+  -webkit-font-smootask: antialiased;
+  -moz-osx-font-smootask: grayscale;
+}
+.business-manager-todo .business-manager-todo-item-done .business-manager-todo-item-checkbox {
+  text-indent: 0;
+  overflow: visible;
+
+}
+.business-manager-todo .business-manager-todo-item-done .business-manager-todo-item-checkbox:before {
+  content: "\f147";
+  margin: -4px 0 0 -4px;
+}
+
+.business-manager-todo .business-manager-todo-item-done .business-manager-todo-item-title-text {
+  text-decoration: line-through;
+  color: #888;
+}
+.business-manager-todo .business-manager-todo-item-done:hover .business-manager-todo-item-title-text {
+  text-decoration: none;
+}
+.business-manager-todo .business-manager-todo-hide-done .business-manager-todo-item-done {
+  display: none;
+}
+
+
+
+#poststuff .bm .cmb-field-list .cmb2-id--bm-project-tasks {
+  float: none;
+  width: 100%;
+}
+#bm-tasks {
+  margin: 0;
+  display: block;
+}
+#bm-tasks #new-task {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+#bm-tasks .col-left { 
+  position:absolute; 
+  min-height:1px; 
+  padding: 0; 
+  width:560px; 
+  z-index: 9;
+  display: none;
+}
+
+#bm-tasks .col-right { 
+  position:relative; 
+  min-height:1px; 
+  width:100%;
+  z-index: 8;
+}
+/* @media (min-width: 768px) and (max-width: 991px) {    
+    #bm-tasks .col-left { width:220px; }
+    #bm-tasks .col-right { width:calc(100% - 240px);}        
+}
+/* @media (min-width: 768px) and (max-width: 991px) {    
+    #bm-tasks .col-left { width:220px; }
+    #bm-tasks .col-right { width:calc(100% - 240px);}        
+}                                          
+@media (min-width: 992px) and (max-width: 1199px) {
+    #bm-tasks .col-left { width:260px; }
+    #bm-tasks .col-right { width:calc(100% - 280px);}
+}
+@media (min-width: 1200px) {
+    #bm-tasks .col-left { width:280px; }
+    #bm-tasks .col-right { width:calc(100% - 300px);}
+}
+ */
+#bm-tasks .postbox.add-task {
+  background: #fafafa;
+  box-shadow: 1px 20px 30px -2px rgba(0,0,0,0.3);
+}
+#bm-tasks .postbox h2 {
+  border-bottom: 1px solid #ddd;
+  font-weight: 500;
+}
+#bm-tasks .postbox h2 .dashicons {
+	float: right;
+}
+#bm-tasks .input-wrap {
+  display: inline-block;
+  margin: 5px 0;
+  width: 100%;
+}
+#bm-tasks .input-wrap .half {
+  display: inline-block;
+  margin: 0 2% 0 0;
+  width: 49%;
+  float: left;
+}
+#bm-tasks .input-wrap .half:last-child {
+  margin: 0;
+}
+#bm-tasks .input-wrap .select2-selection, #bm-tasks .input-wrap input[type="text"], #bm-tasks .input-wrap textarea, #bm-tasks .input-wrap #color {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 14px;
+  height: auto;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07 );
+  background-color: #fff;
+  color: #32373c;
+  outline: none;
+  transition: 0.05s border-color ease-in-out;
+  border-radius: 0;
+}
+#bm-tasks .input-wrap input[type="text"]:focus, #bm-tasks .input-wrap textarea:focus {
+  box-shadow: 0 0 4px rgba(38, 160, 242,0.3);
+  border: 1px solid rgba(38, 160, 242, 0.4);
+}
+#bm-tasks .input-wrap .select2-selection {
+  padding: 0;
+  min-height: 20px;
+}
+#bm-tasks .input-wrap .select2-selection li {
+  margin-bottom: 0;
+}
+
+#bm-tasks .input-wrap #color {
+  display: inline;
+  width: 80px !important;
+  padding: 3px 4px;
+  margin-top: 0;
+}
+
+#bm-tasks .input-wrap .wp-picker-container {
+  padding: 0px;
+  float: right;
+}
+#bm-tasks .input-wrap .wp-picker-container.wp-picker-active {
+  background: #fff;
+  padding: 10px;
+  z-index: 999;
+  position: relative;
+  box-shadow: 0 0 2px rgba(0,0,0,0.4)
+}
+#bm-tasks .input-wrap .wp-color-result {
+  margin: 0;
+}
+#bm-tasks .input-wrap .wp-picker-input-wrap {
+  float: right;
+}
+
+
+
+#bm-tasks .input-wrap #file-container img {
+  max-width: 100px;
+}
+#bm-tasks .business-manager-message {
+  padding: 6px 16px;
+  background: #fff;
+  font-weight: bold;
+  border-left: 4px solid #00a0d2;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+
+
+#bm-tasks .sort-wrapper *, .sort-wrapper  *:before, .sort-wrapper  *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#bm-tasks .sort-wrapper h4 {
+  display: inline-block;
+  width: 32%;
+  float: left;
+  margin: 9px 2% 0 0;
+  padding: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+}
+#bm-tasks .sort-wrapper h4.col-1 {
+  background-color: #be3f3f;
+}
+#bm-tasks .sort-wrapper h4.col-2 {
+  background-color: #e09d30;
+}
+#bm-tasks .sort-wrapper h4.col-3 {
+  background-color: #308129;
+}
+#bm-tasks .sort-wrapper h4:nth-child(3) {
+  margin-right: 0 !important;
+}
+#bm-tasks .sortable {
+  width: 32%;
+  min-height: 20px;
+  list-style-type: none;
+  margin-right: 2%;
+  padding: 0;
+  float: left;
+  border-bottom: 2px dashed #ddd;
+  margin-top: 0;
+  background: #f9f9f9;
+}
+
+#bm-tasks .sortable.cols-1 {
+  width: 100%;
+  margin: 0;
+}
+#bm-tasks .sortable.cols-2 {
+  width: 49%;
+  margin-right: 2%;
+}
+#bm-tasks .sortable.cols-3 {
+  width: 32%;
+  margin-right: 2%;
+}
+#bm-tasks .sortable.cols-4 {
+  width: 24%;
+  margin-right: 1.333%;
+}
+#bm-tasks .sortable:last-child {
+  margin: 0 !important;
+}
+#bm-tasks .sortable li.task {
+  margin: 0 0 10px 0;
+  padding: 7px 8px 4px;
+  width: auto;
+  display: block;
+  min-height: 46px;
+  background: #fff;
+  border: none;
+  border-bottom: 3px solid #fff;
+  box-shadow: 0 0 1px rgba(0,0,0,0.4);
+}
+#bm-tasks .sortable li.task .handle {
+  width: calc(100% - 50px);
+  padding: 1px 0 0 0;
+  background: transparent;
+  display: block;
+  position: relative;
+  z-index: 9999;
+  float: left;
+  margin: 3px 0 0;
+  border-top: 2px dotted rgba(0,0,0,0.15);
+  border-bottom: 2px dotted rgba(0,0,0,0.15);
+}
+#bm-tasks .sortable li.task .handle:hover {
+  cursor: move;
+  border-top: 2px dotted rgba(0,0,0,0.3);
+  border-bottom: 2px dotted rgba(0,0,0,0.3);
+}
+
+
+#bm-tasks .sortable li.task .edit, #bm-tasks .sortable li.task .delete {
+  margin-top: -4px;
+  margin-right: -3px;
+  position: relative;
+  float: right;
+  cursor: pointer;
+}
+#bm-tasks .sortable li.task .edit {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+#bm-tasks .sortable li.task .edit .dashicons, #bm-tasks .sortable li.task .delete .dashicons {
+  color: #bbb;
+}
+#bm-tasks .sortable li.task .edit:hover .dashicons, #bm-tasks .sortable li.task .delete:hover .dashicons {
+  color: #777;
+}
+
+#bm-tasks .sortable li.task .inner .confirm {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  background: #fff;
+  padding: 4px 0px 4px 8px;
+  box-shadow: 0 0 5px 8px rgba(255,255,255,0.9);
+  display: block;
+  width: auto;
+  z-index: 99;
+  font-size: 12px
+}
+#bm-tasks .sortable li.task .confirm .confirm-delete {
+  background: #d54e21;
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #fff;
+  margin-left: 4px;
+  cursor: pointer
+}
+#bm-tasks .sortable li.task .confirm .cancel-delete {
+  color: #0073aa;
+  cursor: pointer
+}
+
+
+#bm-tasks .sortable li.task .inner {
+  width: 100%;
+  display: inline-block;
+  margin-top: 3px;
+  padding: 0 2px;
+  position: relative;
+}
+
+#bm-tasks .sortable li.task .title {
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 8px
+}
+
+#bm-tasks .sortable li.task .file {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  margin: 10px 0 15px;
+}
+#bm-tasks .sortable li.task .file img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+  float: left;
+  margin-right: 20px;
+}
+#bm-tasks .sortable li.task .file .icons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.3);
+  padding: 2px 5px 0 3px;
+}
+#bm-tasks .sortable li.task .file .icons .dashicons {
+  color: #fff;
+  text-shadow: 0 0 1px rgba(0,0,0,0.7);
+  width: 16px;
+  font-size: 18px;
+}
+#bm-tasks .sortable li.task .file .data span {
+  display: block;
+  word-wrap: break-word;
+  width: calc(100% - 70px);
+  float: left;
+}
+#bm-tasks .sortable li .notes {
+  padding: 8px 0;
+}
+#bm-tasks .sortable li .todos {
+  margin: 10px 0;
+}
+#bm-tasks .sortable li .todos li {
+  margin-bottom: 3px;
+}
+#bm-tasks .sortable li .todos li.true .text {
+  color: #aaa;
+  text-decoration: line-through;
+}
+#bm-tasks .sortable li .todos li.true .dashicons::before {
+  content: "\f147";
+}
+#bm-tasks .sortable li .todos li.false .dashicons::before {
+  content: "\f460";
+}
+
+#bm-tasks .sortable li .start_date {
+  margin: 2px 0 4px;
+}
+#bm-tasks .sortable li .end_date {
+  margin: 2px 0 4px;
+}
+

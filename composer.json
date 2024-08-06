@@ -1,0 +1,23 @@
+{
+    "autoload": {
+        "psr-4": {
+            "BusinessManager\\": "includes"
+        }
+    },
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+		"squizlabs/php_codesniffer": "^3.6",
+		"wp-coding-standards/wpcs": "^2.3"
+	},
+	"scripts": {
+		"lint": "./vendor/bin/phpcs --standard=phpcs.xml"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+    "require": {
+        "rlanvin/php-rrule": "^2.4"
+    }
+}
